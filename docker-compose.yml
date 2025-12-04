@@ -1,0 +1,76 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: DockerfileFrontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - backend
+    networks:
+      - eCommerce
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: DockerfileBackend
+    volumes:
+      - ./backend:/app
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - database
+    command: ["npm", "run", "dev"]
+    networks:
+      - eCommerce
+    restart: unless-stopped
+
+  database:
+    image: mysql:8.0
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - eCommerce_vol:/var/lib/mysql
+    networks:
+      - eCommerce
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: eCommerce
+      MYSQL_USER: angel
+      MYSQL_PASSWORD: 123456
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: database
+      PMA_USER: angel
+      PMA_PASSWORD: 123456
+    depends_on:
+      - database
+    networks:
+      - eCommerce
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./web
+      dockerfile: DockerfileNginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - eCommerce
+    restart: unless-stopped
+
+networks:
+  eCommerce:
+    driver: bridge
+
+volumes:
+  eCommerce_vol:
