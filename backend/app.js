@@ -3,7 +3,7 @@ import cors from 'cors';
 import router from './src/routes/routes.js';
 
 import { testConnection } from './src/db/db.js';
-import { insertTestData } from './src/db/dataTest.js';
+import { insertAllTestData } from './src/db/dataTest.js';
 
 const app = express();
 
@@ -19,7 +19,7 @@ const PORT = 4000;
 //Base de datos
 await testConnection();
 //Data test
-//await insertTestData();
+//await insertAllTestData();
 
 
 app.listen(PORT, '0.0.0.0', () => {
