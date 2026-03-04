@@ -4,6 +4,8 @@ import { setAddress } from '../Controllers/addressController.js';
 import { getAllProductsImg, getCategories, getProductImg, getProducts } from '../Controllers/productsController.js';
 import { addToCart, clearCart, getCartByUser, removeItemFromCart } from '../Controllers/cartController.js';
 import { createOrderFromCart, getOrdersByUser } from '../Controllers/ordersController.js';
+import { searchProducts } from '../Controllers/searchController.js';
+import { addCategory, addProduct } from '../Controllers/adminController.js';
 
 const router = express.Router();
 
@@ -27,6 +29,7 @@ router.post('/products', getProducts);
 router.post('/categories', getCategories);
 router.post('/products/:product_id/img', getProductImg);
 router.post('/products/img', getAllProductsImg);
+router.post('/search', searchProducts);
 
 // Cart
 router.post('/cart/add', addToCart);
@@ -37,5 +40,9 @@ router.delete('/cart/:userId/clear', clearCart);
 // Orders
 router.post('/orders/from-cart', createOrderFromCart);
 router.get('/orders/user/:userId', getOrdersByUser);
+
+// Admin
+router.post('/admin/categories', addCategory);
+router.post('/admin/products', addProduct);
 
 export default router;

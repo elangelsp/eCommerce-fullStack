@@ -178,3 +178,41 @@ export const fetchOrdersByUser = async (userId) => {
         console.log(error);
     }
 }
+
+// Admin
+export const addCategoryService = async (name, identificador_url) => {
+    try {
+        const response = await fetch(`/api/admin/categories`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, identificador_url })
+        });
+        return response.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const addProductService = async (name, description, price, stock, categoryId, imageUrl) => {
+    try {
+        const response = await fetch(`/api/admin/products`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                name, 
+                description, 
+                price, 
+                stock, 
+                categoryId, 
+                imageUrl 
+            })
+        });
+        return response.json();
+    } catch (error) {
+        console.log(error);
+    }
+}

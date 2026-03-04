@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import Dashboard from "../pages/Dashboard";
+import AdminPanel from "../pages/AdminPanel";
 import Product from "../pages/Product";
 import CartPage from "../pages/CartPage";
 import OrdersPage from "../pages/OrdersPage";
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path:"/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path:"/admin",
+        element: <AdminPanel />,
       },
       {
         path: "/products/:id",

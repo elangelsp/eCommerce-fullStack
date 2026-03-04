@@ -19,9 +19,11 @@ const getOrCreateCart = async (userId) => {
 const getCartItemsByCartId = async (cartId) => {
   const sql = `
     SELECT ci.product_id, ci.quantity, 
-           p.name, p.description, p.price
+           p.name, p.description, p.price,
+           pi.url as primaryImageUrl
     FROM cart_items ci
     JOIN products p ON p.id = ci.product_id
+    LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.is_primary = TRUE
     WHERE ci.cart_id = ?
   `
   const data = query(sql, [cartId])

@@ -10,6 +10,7 @@ const mapBackendItemsToState = (rows) =>
       name: row.name,
       description: row.description,
       price: row.price,
+      primaryImageUrl: row.primaryImageUrl,
     },
     quantity: row.quantity,
   }))

@@ -28,7 +28,7 @@ export const getProductImg = async (req, res) => {
     const { product_id } = req.params;
     try {
         const sql = 'SELECT url FROM product_images WHERE product_id = ?';
-        const data = query(sql, product_id);
+        const data = query(sql, [product_id]);
         const images = await data();
         res.status(200).json(images);
     } catch (error) {

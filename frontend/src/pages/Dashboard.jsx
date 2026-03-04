@@ -46,7 +46,7 @@ const Dashboard = () => {
         setProfile(data.user);
         setEditPassword('');
         // Actualizamos el contexto para que el nombre se vea en el header
-        login(data.user.name, userId);
+        login(data.user.name, userId, data.user.role || 'user');
         setProfileMessage('Datos actualizados correctamente.');
       } else {
         setProfileMessage('No se pudieron actualizar los datos.');

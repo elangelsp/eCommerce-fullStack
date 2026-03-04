@@ -18,7 +18,7 @@ const PORT = 4000;
 
 //Base de datos
 await testConnection();
-//Data test
+//Data test (solo la primera vez para introducir los datos en la base de datos con datos de prueba)
 //await insertAllTestData();
 
 
